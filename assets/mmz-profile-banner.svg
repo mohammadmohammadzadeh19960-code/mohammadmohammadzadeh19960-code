@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="330" viewBox="0 0 1280 330" role="img" aria-labelledby="title desc">
+<title id="title">MMZ — Mechanical Engineering and Research &amp; Development</title>
+<desc id="desc">Deep navy and teal engineering-inspired banner with concentric orbits and a geometric MMZ monogram</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#081529"/><stop offset=".55" stop-color="#10213c"/><stop offset="1" stop-color="#102848"/></linearGradient>
+  <linearGradient id="signal" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#50f1e0"/><stop offset=".58" stop-color="#4f9efa"/><stop offset="1" stop-color="#af84ff"/></linearGradient>
+  <radialGradient id="glow"><stop stop-color="#13c5d9" stop-opacity=".18"/><stop offset="1" stop-color="#13c5d9" stop-opacity="0"/></radialGradient>
+  <pattern id="mesh" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M34 0H0V34" fill="none" stroke="#6fb5ec" stroke-opacity=".16" stroke-width="1"/></pattern>
+  <clipPath id="frame"><rect width="1280" height="330" rx="22"/></clipPath>
+</defs>
+<g clip-path="url(#frame)">
+  <rect width="1280" height="330" fill="url(#bg)"/>
+  <rect x="810" width="470" height="330" fill="url(#mesh)"/>
+  <ellipse cx="1040" cy="172" rx="370" ry="300" fill="url(#glow)"/>
+  <g fill="none" stroke="url(#signal)" stroke-opacity=".45" stroke-width="2">
+    <ellipse cx="1080" cy="155" rx="225" ry="93" transform="rotate(-18 1080 155)"/>
+    <ellipse cx="1080" cy="155" rx="290" ry="127" transform="rotate(-18 1080 155)"/>
+    <path d="M825 238C928 118 1043 290 1126 180S1257 122 1340 150"/>
+  </g>
+  <g fill="#5eebf0" fill-opacity=".64">
+    <circle cx="945" cy="100" r="4"/><circle cx="1145" cy="247" r="4"/><circle cx="1230" cy="82" r="3"/>
+  </g>
+  <rect x="54" y="63" width="173" height="173" rx="34" fill="#142d4d" stroke="#64b3e9" stroke-opacity=".55" stroke-width="2"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="9">
+    <path d="M81 184V111L105 142L129 111V184" stroke="#51e4d7"/>
+    <path d="M133 184V111L156 142L179 111V184" stroke="#6bb7fc"/>
+    <path d="M183 184V111L199 143L215 111V184" stroke="#a18aff"/>
+  </g>
+  <g font-family="Segoe UI, Arial, Helvetica, sans-serif">
+    <text x="264" y="99" font-size="19" letter-spacing="3" font-weight="600" fill="#77deea">ENGINEERING  /  RESEARCH &amp; DEVELOPMENT</text>
+    <text x="260" y="166" font-size="51" font-weight="750" fill="#f3f8ff">MMZ</text>
+    <text x="263" y="215" font-size="25" fill="#c0d4ec">Mechanical Engineering · Collaborative R&amp;D</text>
+    <text x="264" y="263" font-size="18" fill="#9bbbd9">TandemVector Labs · Building reliable systems together</text>
+  </g>
+  <path d="M264 282H682" stroke="url(#signal)" stroke-width="4" stroke-linecap="round"/>
+  <rect x="16" y="16" width="1248" height="298" rx="17" fill="none" stroke="#8aa6d2" stroke-opacity=".24" stroke-width="2"/>
+</g></svg>
