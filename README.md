@@ -30,12 +30,14 @@ Our shared portfolio brings together engineering research, developer tooling, de
 
 <table>
 <tr>
-<td width="50%" valign="top"><a href="https://github.com/TandemVector-Labs/remote-commander-browser"><img src="https://raw.githubusercontent.com/TandemVector-Labs/.github/main/brand/social/remote-commander-browser.png" alt="Remote Commander Browser — CEF desktop browser candidate" width="100%"></a><br><strong><a href="https://github.com/TandemVector-Labs/remote-commander-browser">Remote Commander Browser</a></strong><br>Independent desktop browser shell; see the repository for supported builds and limitations.</td>
-<td width="50%" valign="top"><a href="https://github.com/TandemVector-Labs/ChatGPTRemoteCommander"><img src="https://raw.githubusercontent.com/TandemVector-Labs/.github/main/brand/social/ChatGPTRemoteCommander.png" alt="ChatGPT Remote Commander — permission-aware MCP tooling" width="100%"></a><br><strong><a href="https://github.com/TandemVector-Labs/ChatGPTRemoteCommander">ChatGPT Remote Commander</a></strong><br>Organization development fork; <a href="https://github.com/GOD13emad/ChatGPTRemoteCommander">personal upstream and releases</a>.</td>
+<td width="50%" valign="top"><a href="https://github.com/TandemVector-Labs/remote-commander-browser"><img src="assets/projects/RemoteCommanderBrowser-hero-20261030.png" alt="Remote Commander Browser — CEF desktop browser candidate" width="100%"></a><br><strong><a href="https://github.com/TandemVector-Labs/remote-commander-browser">Remote Commander Browser</a></strong><br>Independent desktop browser shell; see the repository for supported builds and limitations.</td>
+<td width="50%" valign="top"><a href="https://github.com/TandemVector-Labs/ChatGPTRemoteCommander"><img src="assets/projects/ChatGPTRemoteCommander-hero-20261030.png" alt="ChatGPT Remote Commander — permission-aware MCP tooling" width="100%"></a><br><strong><a href="https://github.com/TandemVector-Labs/ChatGPTRemoteCommander">ChatGPT Remote Commander</a></strong><br>Organization development fork; <a href="https://github.com/GOD13emad/ChatGPTRemoteCommander">personal upstream and releases</a>.</td>
 </tr>
 </table>
 
 *These are entry points into the shared portfolio, not claims of individual authorship, product endorsement or production readiness.*
+
+*The full-resolution covers are conceptual illustrations, not application screenshots, verified runtime results or proof of a supported release.*
 
 ## Explore the shared portfolio
 
