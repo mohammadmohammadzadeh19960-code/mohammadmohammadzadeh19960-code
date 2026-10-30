@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/mmz-profile-banner.svg" alt="MMZ — Mechanical Engineering, Research & Development, TandemVector Labs" width="100%">
+  <img src="assets/mmz-profile-approved-20261030.webp" alt="MMZ — Mechanical Engineering, Research & Development, TandemVector Labs" width="100%">
 </p>
 
 # MMZ
