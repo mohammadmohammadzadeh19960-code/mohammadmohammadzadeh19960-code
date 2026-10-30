@@ -2,13 +2,23 @@
   <img src="assets/mmz-profile-banner.svg" alt="MMZ — Mechanical Engineering, Research & Development, TandemVector Labs" width="100%">
 </p>
 
-<h1 align="center">MMZ</h1>
-<p align="center"><strong>Mechanical Engineering PhD candidate · Research & Development · Technical collaboration</strong></p>
-<p align="center">
+# MMZ
+
+<table>
+<tr>
+<td width="152" align="center" valign="middle">
+  <img src="https://avatars.githubusercontent.com/u/332195122?v=4" width="128" alt="MMZ — current public GitHub profile avatar">
+</td>
+<td valign="middle">
+  <strong>Mechanical Engineering PhD candidate</strong><br>
+  Research &amp; Development · Technical Collaboration · Reproducible Engineering<br><br>
+  Working across engineering research and shared technical projects, with an emphasis on responsible collaboration and evidence-based development.<br><br>
   <a href="https://github.com/TandemVector-Labs">TandemVector Labs</a> ·
-  <a href="https://github.com/TandemVector-Labs/.github/blob/main/PROJECT_CATALOG.md">Project directory</a> ·
+  <a href="https://github.com/TandemVector-Labs/.github/blob/main/PROJECT_CATALOG.md">Explore projects</a> ·
   <a href="https://github.com/TandemVector-Labs/.github/blob/main/CONTRIBUTING.md">Contribute</a>
-</p>
+</td>
+</tr>
+</table>
 
 ## About
 
