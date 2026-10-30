@@ -1,0 +1,22 @@
+name: Profile artwork integrity
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  approved-banner:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Checkout the source snapshot
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Verify exact approved image and README reference
+        run: >-
+          python3 tools/verify_profile_artwork.py
+          --image assets/mmz-profile-approved-20261030.webp
+          --blob-sha 2d7263ec8e2e5a81ead8e493a93f20027e7f47cf
+          --retired-path assets/mmz-profile-banner.svg
