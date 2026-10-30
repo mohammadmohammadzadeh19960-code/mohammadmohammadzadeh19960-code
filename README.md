@@ -10,7 +10,7 @@
   <img src="https://avatars.githubusercontent.com/u/332195122?v=4" width="128" alt="MMZ — current public GitHub profile avatar">
 </td>
 <td valign="middle">
-  <strong>Mechanical Engineering PhD candidate</strong><br>
+  <strong>Mechanical Engineering · PhD Research</strong><br>
   Research &amp; Development · Technical Collaboration · Reproducible Engineering<br><br>
   Working across engineering research and shared technical projects, with an emphasis on responsible collaboration and evidence-based development.<br><br>
   <a href="https://github.com/TandemVector-Labs">TandemVector Labs</a> ·
@@ -22,7 +22,7 @@
 
 ## About
 
-I am a mechanical engineering PhD candidate with an interest in **research and development** and collaborative technical work. Alongside [Aliakbar Emadoddin](https://github.com/GOD13emad), I am one of the two GitHub organization owners of **[TandemVector Labs](https://github.com/TandemVector-Labs)**.
+My focus is PhD-level mechanical engineering research, with an interest in **research and development** and collaborative technical work. Alongside [Aliakbar Emadoddin](https://github.com/GOD13emad), I am one of the two GitHub organization owners of **[TandemVector Labs](https://github.com/TandemVector-Labs)**.
 
 Our shared portfolio brings together engineering research, developer tooling, desktop experiences, and connectivity software. We emphasize reproducible work, clear technical documentation, responsible collaboration, and honest statements about project maturity.
 
@@ -57,7 +57,7 @@ The organization currently uses the GitHub handle `TandemVector-Labs`, with the 
 
 ## فارسی
 
-من **MMZ**، دانشجوی دورهٔ دکتری مهندسی مکانیک با تمرکز حرفه‌ای بر **پژوهش و توسعه** و همکاری‌های فنی هستم. به همراه [علی‌اکبر عمادالدین](https://github.com/GOD13emad) در مدیریت مشترک [TandemVector Labs](https://github.com/TandemVector-Labs) مشارکت دارم.
+من **MMZ**، فعال در پژوهش‌های دکتری مهندسی مکانیک با تمرکز حرفه‌ای بر **پژوهش و توسعه** و همکاری‌های فنی هستم. به همراه [علی‌اکبر عمادالدین](https://github.com/GOD13emad) در مدیریت مشترک [TandemVector Labs](https://github.com/TandemVector-Labs) مشارکت دارم.
 
 برای آشنایی با پروژه‌ها و وضعیت واقعی نسخه‌ها، [فهرست پروژه‌های عمومی](https://github.com/TandemVector-Labs/.github/blob/main/PROJECT_CATALOG.md) را ببینید. مالکیت کد، مجوزها و مرجع انتشار هر پروژه در مستندات خودش مشخص است.
 
