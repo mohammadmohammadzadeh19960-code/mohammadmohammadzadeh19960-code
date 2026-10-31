@@ -11,6 +11,38 @@ import re
 import sys
 
 
+def verify_readme_references(source: str) -> None:
+    """Validate local README links/images without networking or private-token access."""
+    from urllib.parse import unquote, urlsplit
+
+    root = Path.cwd().resolve()
+    refs = re.findall(r"!?\[[^\]\n]*\]\(([^)\s]+)", source)
+    refs.extend(re.findall(r"""(?i)\b(?:href|src)\s*=\s*["']([^"']+)["']""", source))
+    local_count = 0
+    for ref in refs:
+        parsed = urlsplit(ref)
+        if parsed.scheme:
+            if parsed.scheme.lower() not in ("http", "https", "mailto", "tel"):
+                raise ValueError("Unsupported README link scheme")
+            continue
+        if parsed.netloc or not parsed.path:
+            continue
+        path = unquote(parsed.path)
+        if path.startswith("/") or ".." in Path(path).parts:
+            raise ValueError("README local link escapes repository")
+        target = (root / path).resolve()
+        if not target.is_relative_to(root) or not target.is_file():
+            raise ValueError(f"README local target missing or outside repository: {path}")
+        local_count += 1
+
+    images = re.findall(r"<img\b[^>]*>", source, flags=re.IGNORECASE | re.DOTALL)
+    for tag in images:
+        alt = re.search(r"""(?i)\balt\s*=\s*["']([^"']+)["']""", tag)
+        if not alt or len(alt.group(1).strip()) < 8:
+            raise ValueError("README image is missing meaningful alt text")
+    print(f"PROFILE_README_REFS_PASS refs={local_count} images={len(images)}")
+
+
 def verify(image_path: str, expected_sha: str, retired_path: str) -> None:
     image = Path(image_path)
     if image.is_absolute() or ".." in image.parts or image.suffix.lower() != ".webp":
@@ -43,6 +75,7 @@ def verify(image_path: str, expected_sha: str, retired_path: str) -> None:
         raise ValueError("The banner needs a meaningful accessible description")
     if retired_path and retired_path in source:
         raise ValueError("README still references a superseded image")
+    verify_readme_references(source)
     print(f"PROFILE_ARTWORK_PASS image={image_path} bytes={len(payload)} blob={blob_sha}")
 
 
