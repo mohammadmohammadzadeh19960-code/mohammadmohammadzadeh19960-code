@@ -31,18 +31,12 @@ Our shared portfolio brings together engineering research, developer tooling, de
 <table>
 <tr>
 <td width="50%" valign="top">
-
-**[Engineering research workflow tooling](https://github.com/TandemVector-Labs/project-execution-brain/pull/59)**
-
-Authored and merged a source-scoped, single-case handoff for the shared evaluation workflow. [Inspect the merged PR](https://github.com/TandemVector-Labs/project-execution-brain/pull/59) and its stated test limits.
-
+<p><strong><a href="https://github.com/TandemVector-Labs/project-execution-brain/pull/59">Engineering research workflow tooling</a></strong></p>
+<p>Authored and merged a source-scoped, single-case handoff for the shared evaluation workflow. The <a href="https://github.com/TandemVector-Labs/project-execution-brain/pull/59">merged PR</a> documents its scope and testing limits.</p>
 </td>
 <td width="50%" valign="top">
-
-**[Reproducible evaluation fixtures](https://github.com/TandemVector-Labs/project-execution-brain/pull/58)**
-
-Authored and merged a source-pinned fixture-preparation improvement. [Inspect the merged PR](https://github.com/TandemVector-Labs/project-execution-brain/pull/58) for actual scope and acceptance.
-
+<p><strong><a href="https://github.com/TandemVector-Labs/project-execution-brain/pull/58">Reproducible evaluation fixtures</a></strong></p>
+<p>Authored and merged a source-pinned fixture-preparation improvement. The <a href="https://github.com/TandemVector-Labs/project-execution-brain/pull/58">merged PR</a> documents the actual changes and acceptance.</p>
 </td>
 </tr>
 </table>
