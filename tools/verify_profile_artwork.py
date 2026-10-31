@@ -9,13 +9,14 @@ import hashlib
 from pathlib import Path
 import re
 import sys
+import tempfile
 
 
-def verify_readme_references(source: str) -> None:
+def verify_readme_references(source: str, root: Path | None = None) -> None:
     """Validate local README links/images without networking or private-token access."""
     from urllib.parse import unquote, urlsplit
 
-    root = Path.cwd().resolve()
+    root = (root if root is not None else Path.cwd()).resolve()
     refs = re.findall(r"!?\[[^\]\n]*\]\(([^)\s]+)", source)
     refs.extend(re.findall(r"""(?i)\b(?:href|src)\s*=\s*["']([^"']+)["']""", source))
     local_count = 0
@@ -41,6 +42,36 @@ def verify_readme_references(source: str) -> None:
         if not alt or len(alt.group(1).strip()) < 8:
             raise ValueError("README image is missing meaningful alt text")
     print(f"PROFILE_README_REFS_PASS refs={local_count} images={len(images)}")
+
+
+def self_test() -> None:
+    """Adversarial local fixtures: valid references pass, unsafe changes fail closed."""
+    with tempfile.TemporaryDirectory() as location:
+        root = Path(location)
+        (root / "assets").mkdir()
+        (root / "assets" / "header.webp").write_bytes(b"fixture only")
+        (root / "guide.md").write_text("ok", encoding="utf-8")
+        valid = ('<img src="assets/header.webp" alt="Verified engineering artwork"> '
+                 '[Guide](guide.md) [GitHub](https://github.com)')
+        verify_readme_references(valid, root=root)
+        cases = {
+            "missing-file": "[Missing](nonexistent.md)",
+            "path-traversal": "[Outside](../outside.md)",
+            "encoded-traversal": "[Encoded](%2e%2e%2foutside.md)",
+            "absolute-path": "[Absolute](/etc/passwd)",
+            "unsupported-scheme": '<a href="javascript:alert">Unsafe</a>',
+            "missing-image-alt": '<img src="assets/header.webp">',
+            "short-image-alt": '<img src="assets/header.webp" alt="x">',
+            "missing-image-target": '<img src="assets/missing.webp" alt="Descriptive image text">',
+        }
+        for name, text in cases.items():
+            try:
+                verify_readme_references(text, root=root)
+            except ValueError:
+                pass
+            else:
+                raise AssertionError("Expected rejection: " + name)
+    print("PROFILE_REF_SELFTEST_PASS cases=9")
 
 
 def verify(image_path: str, expected_sha: str, retired_path: str) -> None:
@@ -81,12 +112,18 @@ def verify(image_path: str, expected_sha: str, retired_path: str) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--image", required=True)
-    parser.add_argument("--blob-sha", required=True)
-    parser.add_argument("--retired-path", required=True)
+    parser.add_argument("--self-test", action="store_true")
+    parser.add_argument("--image")
+    parser.add_argument("--blob-sha")
+    parser.add_argument("--retired-path")
     args = parser.parse_args()
+    if not args.self_test and not all((args.image, args.blob_sha, args.retired_path)):
+        parser.error("--image, --blob-sha, and --retired-path are required")
     try:
-        verify(args.image, args.blob_sha, args.retired_path)
-    except (ValueError, OSError) as exc:
+        if args.self_test:
+            self_test()
+        else:
+            verify(args.image, args.blob_sha, args.retired_path)
+    except (ValueError, OSError, AssertionError) as exc:
         print(f"PROFILE_ARTWORK_FAIL {exc}", file=sys.stderr)
         sys.exit(1)
