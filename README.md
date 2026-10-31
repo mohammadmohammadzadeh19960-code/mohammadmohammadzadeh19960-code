@@ -26,24 +26,24 @@ My focus is PhD-level mechanical engineering research, with an interest in **res
 
 Our shared portfolio brings together engineering research, developer tooling, desktop experiences, and connectivity software. We emphasize reproducible work, clear technical documentation, responsible collaboration, and honest statements about project maturity.
 
-## Selected verified contributions
+## Selected verified public contributions
 
 <table>
 <tr>
 <td width="50%" valign="top">
-<p><strong><a href="https://github.com/TandemVector-Labs/project-execution-brain/pull/59">Engineering research workflow tooling</a></strong></p>
-<p>Authored and merged a source-scoped, single-case handoff for the shared evaluation workflow. The <a href="https://github.com/TandemVector-Labs/project-execution-brain/pull/59">merged PR</a> documents its scope and testing limits.</p>
+<p><strong><a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/397">Windows identity-verification resilience</a></strong></p>
+<p>Authored and merged a scoped, read-only Router verification fallback for Windows identity-resolution failures. The <a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/397">public PR</a> documents six focused tests and remaining host limitations; no deployment claim.</p>
 </td>
 <td width="50%" valign="top">
-<p><strong><a href="https://github.com/TandemVector-Labs/project-execution-brain/pull/58">Reproducible evaluation fixtures</a></strong></p>
-<p>Authored and merged a source-pinned fixture-preparation improvement. The <a href="https://github.com/TandemVector-Labs/project-execution-brain/pull/58">merged PR</a> documents the actual changes and acceptance.</p>
+<p><strong><a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/289">Cross-platform CI reliability</a></strong></p>
+<p>Authored and merged a bounded Windows startup-readiness test improvement for MCP Tasks. The <a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/289">public PR</a> separates test-fixture timing from production behavior.</p>
 </td>
 </tr>
 </table>
 
-**[Joint technical stewardship](https://github.com/TandemVector-Labs/.github/blob/main/GOVERNANCE.md)** — organization repositories, review workflows and attribution are documented separately from personal authorship and software-release authority.
+**[Joint technical stewardship](https://github.com/TandemVector-Labs/.github/blob/main/GOVERNANCE.md)** — organization repositories, contribution reviews, and attribution remain distinct from personal authorship and release authority.
 
-<sub>These are verifiable contribution examples, not claims of GitHub Achievement badge tiers, independent human sign-off or completed product release.</sub>
+<sub>Publicly verifiable merged contribution examples, not GitHub Achievement badge tiers, human security sign-off, or product-release acceptance.</sub>
 
 ## Selected work — visual directory
 
