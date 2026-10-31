@@ -26,6 +26,31 @@ My focus is PhD-level mechanical engineering research, with an interest in **res
 
 Our shared portfolio brings together engineering research, developer tooling, desktop experiences, and connectivity software. We emphasize reproducible work, clear technical documentation, responsible collaboration, and honest statements about project maturity.
 
+## Selected verified contributions
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+**[Engineering research workflow tooling](https://github.com/TandemVector-Labs/project-execution-brain/pull/59)**
+
+Authored and merged a source-scoped, single-case handoff for the shared evaluation workflow. [Inspect the merged PR](https://github.com/TandemVector-Labs/project-execution-brain/pull/59) and its stated test limits.
+
+</td>
+<td width="50%" valign="top">
+
+**[Reproducible evaluation fixtures](https://github.com/TandemVector-Labs/project-execution-brain/pull/58)**
+
+Authored and merged a source-pinned fixture-preparation improvement. [Inspect the merged PR](https://github.com/TandemVector-Labs/project-execution-brain/pull/58) for actual scope and acceptance.
+
+</td>
+</tr>
+</table>
+
+**[Joint technical stewardship](https://github.com/TandemVector-Labs/.github/blob/main/GOVERNANCE.md)** — organization repositories, review workflows and attribution are documented separately from personal authorship and software-release authority.
+
+<sub>These are verifiable contribution examples, not claims of GitHub Achievement badge tiers, independent human sign-off or completed product release.</sub>
+
 ## Selected work — visual directory
 
 <table>
