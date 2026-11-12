@@ -49,7 +49,7 @@ Our shared portfolio brings together engineering research, developer tooling, de
 
 <table>
 <tr>
-<td width="50%" valign="top"><a href="https://github.com/TandemVector-Labs/remote-commander-browser"><img src="assets/projects/RemoteCommanderBrowser-hero-20261030.png" alt="Remote Commander Browser — CEF desktop browser candidate" width="100%"></a><br><strong><a href="https://github.com/TandemVector-Labs/remote-commander-browser">Remote Commander Browser</a></strong><br>Independent desktop browser shell; see the repository for supported builds and limitations.</td>
+<td width="50%" valign="top"><a href="https://github.com/TandemVector-Labs/remote-commander-browser-fork"><img src="assets/projects/RemoteCommanderBrowser-hero-20261030.png" alt="Remote Commander Browser — CEF desktop browser candidate" width="100%"></a><br><strong><a href="https://github.com/TandemVector-Labs/remote-commander-browser-fork">Remote Commander Browser</a></strong><br>Organization collaboration fork; <a href="https://github.com/GOD13emad/remote-commander-browser">personal upstream and releases</a>. Independent CEF shell; candidate-stage software, not a stable release.</td>
 <td width="50%" valign="top"><a href="https://github.com/TandemVector-Labs/ChatGPTRemoteCommander"><img src="assets/projects/ChatGPTRemoteCommander-hero-20261030.png" alt="ChatGPT Remote Commander — permission-aware MCP tooling" width="100%"></a><br><strong><a href="https://github.com/TandemVector-Labs/ChatGPTRemoteCommander">ChatGPT Remote Commander</a></strong><br>Organization development fork; <a href="https://github.com/GOD13emad/ChatGPTRemoteCommander">personal upstream and releases</a>.</td>
 </tr>
 </table>
@@ -64,7 +64,7 @@ Our shared portfolio brings together engineering research, developer tooling, de
 | :--- | :--- |
 | **Research & engineering** | [TandemVector Labs](https://github.com/TandemVector-Labs) — joint engineering and software R&D |
 | **Projects & provenance** | [Public project directory](https://github.com/TandemVector-Labs/.github/blob/main/PROJECT_CATALOG.md) — upstream sources, maturity, and release locations |
-| **Desktop software** | [Remote Commander Browser](https://github.com/TandemVector-Labs/remote-commander-browser) · [Appearance Studio Core](https://github.com/TandemVector-Labs/AppearanceStudio-Core) |
+| **Desktop software** | [Remote Commander Browser — organization fork](https://github.com/TandemVector-Labs/remote-commander-browser-fork) · [Appearance Studio Core — organization fork](https://github.com/TandemVector-Labs/AppearanceStudio-Core-fork) |
 | **Developer tools** | [ChatGPT Remote Commander — shared fork](https://github.com/TandemVector-Labs/ChatGPTRemoteCommander) · [original upstream](https://github.com/GOD13emad/ChatGPTRemoteCommander) |
 | **Collaboration & security** | [Contributing](https://github.com/TandemVector-Labs/.github/blob/main/CONTRIBUTING.md) · [Governance](https://github.com/TandemVector-Labs/.github/blob/main/GOVERNANCE.md) · [Security](https://github.com/TandemVector-Labs/.github/blob/main/SECURITY.md) |
 
@@ -72,7 +72,7 @@ These links describe **shared organizational work**, not a claim that I personal
 
 ## Working together
 
-For a feature, bug, or contribution, begin with the relevant organization repository and its issue tracker or pull requests. For confidential vulnerabilities, use that project's `SECURITY.md` instead of a public issue.
+For shared development, start with the relevant organization fork and its pull requests. Report bugs through the organization Issues tracker where enabled; for the transferred Browser and Appearance Studio forks (organization Issues currently disabled), use the linked personal upstream's Issues tracker. For confidential vulnerabilities, follow the project's `SECURITY.md` instead of publishing a public report.
 
 The organization currently uses the GitHub handle `TandemVector-Labs`, with the shared public identity **TandemVector Labs**. The name represents a technical collaboration, not a claim of registered company status.
 
