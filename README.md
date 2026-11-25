@@ -72,7 +72,7 @@ These links describe **shared organizational work**, not a claim that I personal
 
 ## Working together
 
-For shared development, start with the relevant organization fork and its pull requests. Report bugs through the organization Issues tracker where enabled; for the transferred Browser and Appearance Studio forks (organization Issues currently disabled), use the linked personal upstream's Issues tracker. For confidential vulnerabilities, follow the project's `SECURITY.md` instead of publishing a public report.
+For PRs and Issues, follow the currently published [Governance](https://github.com/TandemVector-Labs/.github/blob/main/GOVERNANCE.md) and [Shared development home](https://github.com/TandemVector-Labs/.github/blob/main/COLLABORATION_HOME.md); an unmerged policy proposal is not yet in force. Organization issue trackers remain available where enabled; for the Browser and Appearance Studio forks with organization Issues disabled, use the linked personal upstream Issues. Report confidential vulnerabilities through the relevant project's `SECURITY.md`, not a public issue.
 
 The organization currently uses the GitHub handle `TandemVector-Labs`, with the shared public identity **TandemVector Labs**. The name represents a technical collaboration, not a claim of registered company status.
 
