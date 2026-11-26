@@ -32,18 +32,28 @@ Our shared portfolio brings together engineering research, developer tooling, de
 <tr>
 <td width="50%" valign="top">
 <p><strong><a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/397">Windows identity-verification resilience</a></strong></p>
-<p>Authored and merged a scoped, read-only Router verification fallback for Windows identity-resolution failures. The <a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/397">public PR</a> documents six focused tests and remaining host limitations; no deployment claim.</p>
+<p>A PR submitted through the MMZ account and merged into the project introduced a scoped, read-only Router verification fallback for Windows identity-resolution failures. The <a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/397">public PR</a> documents six focused tests and remaining host limitations; no deployment claim.</p>
 </td>
 <td width="50%" valign="top">
 <p><strong><a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/289">Cross-platform CI reliability</a></strong></p>
-<p>Authored and merged a bounded Windows startup-readiness test improvement for MCP Tasks. The <a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/289">public PR</a> separates test-fixture timing from production behavior.</p>
+<p>A PR submitted through the MMZ account and merged into the project introduced a bounded Windows startup-readiness test improvement for MCP Tasks. The <a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/289">public PR</a> separates test-fixture timing from production behavior.</p>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<p><strong><a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/311">Privacy-aware delivery diagnostics</a></strong></p>
+<p>Merged into main: a scoped, aggregate-only, read-only delivery-health diagnostic. No message acknowledgement, private payload exposure or deployment claim.</p>
+</td>
+<td width="50%" valign="top">
+<p><strong><a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/609">Cross-platform test-fixture reliability</a></strong></p>
+<p>Merged into a QA integration branch, not main: bounded retry for transient Windows fixture cleanup, with Linux and Windows regression evidence. No production or release promotion.</p>
 </td>
 </tr>
 </table>
 
 **[Joint technical stewardship](https://github.com/TandemVector-Labs/.github/blob/main/GOVERNANCE.md)** — organization repositories, contribution reviews, and attribution remain distinct from personal authorship and release authority.
 
-<sub>Publicly verifiable merged contribution examples, not GitHub Achievement badge tiers, human security sign-off, or product-release acceptance.</sub>
+<sub>Publicly verifiable PRs submitted under the MMZ account, including AI-assisted technical work; account attribution is not proof of unaided human authorship. Main and QA-branch merges are distinct from deployment, GitHub Achievement badge tiers, human security sign-off or product-release acceptance.</sub>
 
 ## Selected work — visual directory
 
