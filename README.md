@@ -49,6 +49,16 @@ Our shared portfolio brings together engineering research, developer tooling, de
 <p>Merged into a QA integration branch, not main: bounded retry for transient Windows fixture cleanup, with Linux and Windows regression evidence. No production or release promotion.</p>
 </td>
 </tr>
+<tr>
+<td width="50%" valign="top">
+<p><strong><a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/174">Windows process containment</a></strong></p>
+<p>MMZ-submitted PR merged into main: tightened the Windows qualification runner’s Job Object containment. The PR records a previously failing detached-child fixture and a passing isolated regression; no live deployment claim.</p>
+</td>
+<td width="50%" valign="top">
+<p><strong><a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/642">Installer configuration integrity</a></strong></p>
+<p>MMZ-submitted PR merged into a QA integration branch, not main: reject stale profile configuration digests before backup or write operations. The PR records 18/18 targeted staged-projection checks across Linux and Windows; no installation or release acceptance.</p>
+</td>
+</tr>
 </table>
 
 **[Joint technical stewardship](https://github.com/TandemVector-Labs/.github/blob/main/GOVERNANCE.md)** — organization repositories, contribution reviews, and attribution remain distinct from personal authorship and release authority.
