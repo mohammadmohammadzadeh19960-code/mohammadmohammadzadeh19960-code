@@ -29,11 +29,13 @@ Our shared portfolio brings together engineering research, developer tooling, de
 
 ## Selected verified public contributions
 
+The six selected public PRs below were submitted through the MMZ account: three merged into main and three into feature or QA integration branches. The merge destinations are distinguished in the individual descriptions.
+
 <table>
 <tr>
 <td width="50%" valign="top">
 <p><strong><a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/397">Windows identity-verification resilience</a></strong></p>
-<p>A PR submitted through the MMZ account and merged into the project introduced a scoped, read-only Router verification fallback for Windows identity-resolution failures. The <a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/397">public PR</a> documents six focused tests and remaining host limitations; no deployment claim.</p>
+<p>A PR submitted through the MMZ account and merged into a feature integration branch, not main, introduced a scoped, read-only Router verification fallback for Windows identity-resolution failures. The <a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/397">public PR</a> documents six focused tests and remaining host limitations; no deployment claim.</p>
 </td>
 <td width="50%" valign="top">
 <p><strong><a href="https://github.com/GOD13emad/ChatGPTRemoteCommander/pull/289">Cross-platform CI reliability</a></strong></p>
