@@ -81,6 +81,44 @@ def verify_readme_references(source: str, root: Path | None = None) -> None:
     print(f"PROFILE_README_REFS_PASS refs={local_count} images={len(images) + len(markdown_images)}")
 
 
+def verify_security_navigation(source: str, root: Path | None = None) -> None:
+    """Keep the published security reporting route discoverable in the README."""
+    from html.parser import HTMLParser
+
+    class SecurityLinkParser(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=True)
+            self.current = None
+            self.labels = []
+
+        def handle_starttag(self, tag, attrs):
+            if tag == "a":
+                if self.current is not None:
+                    raise ValueError("Nested security reporting link")
+                if ("href", "SECURITY.md") in attrs:
+                    self.current = []
+
+        def handle_data(self, data):
+            if self.current is not None:
+                self.current.append(data)
+
+        def handle_endtag(self, tag):
+            if tag == "a" and self.current is not None:
+                self.labels.append(" ".join("".join(self.current).split()).casefold())
+                self.current = None
+
+    parser = SecurityLinkParser()
+    parser.feed(source)
+    parser.close()
+    if parser.current is not None or parser.labels != ["security reporting"]:
+        raise ValueError("README must have one labeled Security reporting link to SECURITY.md")
+    root = (root if root is not None else Path.cwd()).resolve()
+    policy = root / "SECURITY.md"
+    if policy.is_symlink() or not policy.is_file() or not policy.read_text(encoding="utf-8").strip():
+        raise ValueError("Published SECURITY.md missing, redirected or empty")
+    print("PROFILE_SECURITY_NAVIGATION_PASS")
+
+
 def self_test() -> None:
     """Adversarial local fixtures: valid references pass, unsafe changes fail closed."""
     with tempfile.TemporaryDirectory() as location:
@@ -119,6 +157,32 @@ def self_test() -> None:
                 pass
             else:
                 raise AssertionError("Expected rejection: " + name)
+        (root / "SECURITY.md").write_text("# Security policy", encoding="utf-8")
+        link = '<a href="SECURITY.md">Security reporting</a>'
+        verify_security_navigation(link, root)
+        for name, text in {
+            "missing": "[Other](guide.md)",
+            "comment": "<!-- " + link + " -->",
+            "data-href": '<a data-href="SECURITY.md">Security reporting</a>',
+            "image-only": '<img src="SECURITY.md" alt="Security reporting">',
+            "empty-label": '<a href="SECURITY.md"></a>',
+            "duplicate": link + link,
+            "unclosed": '<a href="SECURITY.md">Security reporting',
+        }.items():
+            try:
+                verify_security_navigation(text, root)
+            except ValueError:
+                pass
+            else:
+                raise AssertionError("Expected security navigation rejection: " + name)
+        (root / "SECURITY.md").write_text("", encoding="utf-8")
+        try:
+            verify_security_navigation(link, root)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("Expected empty policy rejection")
+    print("PROFILE_SECURITY_NAVIGATION_SELFTEST_PASS cases=9")
     print("PROFILE_REF_SELFTEST_PASS cases=18")
 
 
@@ -154,6 +218,7 @@ def verify(image_path: str, expected_sha: str, retired_path: str) -> None:
     if retired_path and retired_path in source:
         raise ValueError("README still references a superseded image")
     verify_readme_references(source)
+    verify_security_navigation(source)
     print(f"PROFILE_ARTWORK_PASS image={image_path} bytes={len(payload)} blob={blob_sha}")
 
 
