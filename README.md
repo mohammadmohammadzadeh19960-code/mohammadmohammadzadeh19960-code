@@ -15,7 +15,8 @@
   Working across engineering research and shared technical projects, with an emphasis on responsible collaboration and evidence-based development.<br><br>
   <a href="https://github.com/TandemVector-Labs">TandemVector Labs</a> ·
   <a href="https://github.com/TandemVector-Labs/.github/blob/main/PROJECT_CATALOG.md">Explore projects</a> ·
-  <a href="https://github.com/TandemVector-Labs/.github/blob/main/CONTRIBUTING.md">Contribute</a>
+  <a href="https://github.com/TandemVector-Labs/.github/blob/main/CONTRIBUTING.md">Contribute</a> ·
+  <a href="SECURITY.md">Security reporting</a>
 </td>
 </tr>
 </table>
