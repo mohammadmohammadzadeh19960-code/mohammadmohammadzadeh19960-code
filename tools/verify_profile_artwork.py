@@ -12,13 +12,55 @@ import sys
 import tempfile
 
 
+def parse_html_references(source: str) -> tuple[list[str], list[dict[str, str]]]:
+    """Read actual HTML attributes, not similarly named data-* attributes."""
+    from html.parser import HTMLParser
+
+    class ReferenceParser(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=True)
+            self.refs = []
+            self.images = []
+
+        def handle_starttag(self, tag, attrs):
+            relevant = {}
+            for name, value in attrs:
+                if name in ("src", "href", "alt"):
+                    if name in relevant:
+                        raise ValueError("Duplicate HTML reference attribute")
+                    relevant[name] = value
+            for name in ("src", "href"):
+                if name in relevant:
+                    value = relevant[name]
+                    if not value or not value.strip():
+                        raise ValueError("Empty HTML reference")
+                    self.refs.append(value)
+            if tag == "img":
+                if not relevant.get("src"):
+                    raise ValueError("README image has no source")
+                alt = relevant.get("alt")
+                if not alt or len(alt.strip()) < 8:
+                    raise ValueError("README image is missing meaningful alt text")
+                self.images.append(relevant)
+
+    parser = ReferenceParser()
+    parser.feed(source)
+    parser.close()
+    return parser.refs, parser.images
+
+
 def verify_readme_references(source: str, root: Path | None = None) -> None:
-    """Validate local README links/images without networking or private-token access."""
+    """Validate local inline README links/images without networking or tokens."""
     from urllib.parse import unquote, urlsplit
 
     root = (root if root is not None else Path.cwd()).resolve()
     refs = re.findall(r"!?\[[^\]\n]*\]\(([^)\s]+)", source)
-    refs.extend(re.findall(r"""(?i)\b(?:href|src)\s*=\s*["']([^"']+)["']""", source))
+    html_refs, images = parse_html_references(source)
+    refs.extend(html_refs)
+    markdown_images = re.findall(r"!\[([^\]\n]*)\]\(([^)\s]+)", source)
+    for alt, _ in markdown_images:
+        if len(alt.strip()) < 8:
+            raise ValueError("README Markdown image is missing meaningful alt text")
     local_count = 0
     for ref in refs:
         parsed = urlsplit(ref)
@@ -36,12 +78,7 @@ def verify_readme_references(source: str, root: Path | None = None) -> None:
             raise ValueError(f"README local target missing or outside repository: {path}")
         local_count += 1
 
-    images = re.findall(r"<img\b[^>]*>", source, flags=re.IGNORECASE | re.DOTALL)
-    for tag in images:
-        alt = re.search(r"""(?i)\balt\s*=\s*["']([^"']+)["']""", tag)
-        if not alt or len(alt.group(1).strip()) < 8:
-            raise ValueError("README image is missing meaningful alt text")
-    print(f"PROFILE_README_REFS_PASS refs={local_count} images={len(images)}")
+    print(f"PROFILE_README_REFS_PASS refs={local_count} images={len(images) + len(markdown_images)}")
 
 
 def self_test() -> None:
@@ -52,7 +89,9 @@ def self_test() -> None:
         (root / "assets" / "header.webp").write_bytes(b"fixture only")
         (root / "guide.md").write_text("ok", encoding="utf-8")
         valid = ('<img src="assets/header.webp" alt="Verified engineering artwork"> '
-                 '[Guide](guide.md) [GitHub](https://github.com)')
+                 '[Guide](guide.md) [GitHub](https://github.com) '
+                 '![Engineering artwork](assets/header.webp) '
+                 '<a href=guide.md>Guide</a>')
         verify_readme_references(valid, root=root)
         cases = {
             "missing-file": "[Missing](nonexistent.md)",
@@ -63,6 +102,15 @@ def self_test() -> None:
             "missing-image-alt": '<img src="assets/header.webp">',
             "short-image-alt": '<img src="assets/header.webp" alt="x">',
             "missing-image-target": '<img src="assets/missing.webp" alt="Descriptive image text">',
+            "data-alt-is-not-alt": '<img src="assets/header.webp" data-alt="Not a real alt attribute">',
+            "markdown-short-alt": '![x](assets/header.webp)',
+            "markdown-empty-alt": '![](assets/header.webp)',
+            "missing-image-src": '<img alt="Descriptive image text">',
+            "unquoted-missing-image-target": '<img src=assets/missing.webp alt="Descriptive image text">',
+            "duplicate-image-src": '<img src="assets/header.webp" src="assets/header.webp" alt="Descriptive image text">',
+            "duplicate-image-alt": '<img src="assets/header.webp" alt="Descriptive image text" alt="Other image description">',
+            "unquoted-missing-link": '<a href=missing.md>Missing</a>',
+            "encoded-unsupported-scheme": '<a href="java&#115;cript:alert">Unsafe</a>',
         }
         for name, text in cases.items():
             try:
@@ -71,7 +119,7 @@ def self_test() -> None:
                 pass
             else:
                 raise AssertionError("Expected rejection: " + name)
-    print("PROFILE_REF_SELFTEST_PASS cases=9")
+    print("PROFILE_REF_SELFTEST_PASS cases=18")
 
 
 def verify(image_path: str, expected_sha: str, retired_path: str) -> None:
@@ -93,16 +141,15 @@ def verify(image_path: str, expected_sha: str, retired_path: str) -> None:
     if blob_sha != expected_sha:
         raise ValueError(f"Approved image byte identity changed ({blob_sha})")
     source = Path("README.md").read_text(encoding="utf-8")
-    img_tags = re.findall(r"<img\b[^>]*>", source, flags=re.IGNORECASE | re.DOTALL)
-    matches = []
-    for tag in img_tags:
-        src = re.search(r"""\bsrc\s*=\s*["']([^"']+)["']""", tag, re.IGNORECASE)
-        if src and src.group(1) == image_path:
-            matches.append(tag)
-    if len(matches) != 1:
+    _, images = parse_html_references(source)
+    matches = [image for image in images if image.get("src") == image_path]
+    markdown_matches = [
+        ref for _, ref in re.findall(r"!\[([^\]\n]*)\]\(([^)\s]+)", source)
+        if ref == image_path
+    ]
+    if len(matches) != 1 or markdown_matches:
         raise ValueError("README must display the approved banner exactly once")
-    alt = re.search(r"""\balt\s*=\s*["']([^"']+)["']""", matches[0], re.IGNORECASE)
-    if not alt or len(alt.group(1).strip()) < 15:
+    if len(matches[0]["alt"].strip()) < 15:
         raise ValueError("The banner needs a meaningful accessible description")
     if retired_path and retired_path in source:
         raise ValueError("README still references a superseded image")
