@@ -63,14 +63,23 @@ def verify_readme_references(source: str, root: Path | None = None) -> None:
             raise ValueError("README Markdown image is missing meaningful alt text")
     local_count = 0
     for ref in refs:
+        if ref != ref.strip() or any(ord(ch) < 32 or ord(ch) == 127 for ch in ref) or "\\" in ref:
+            raise ValueError("Ambiguous README reference characters")
         parsed = urlsplit(ref)
         if parsed.scheme:
-            if parsed.scheme.lower() not in ("http", "https", "mailto", "tel"):
+            scheme = parsed.scheme.lower()
+            if scheme not in ("http", "https", "mailto", "tel"):
                 raise ValueError("Unsupported README link scheme")
+            if scheme in ("http", "https") and (not parsed.netloc or not parsed.hostname):
+                raise ValueError("HTTP(S) README reference requires a host")
             continue
-        if parsed.netloc or not parsed.path:
+        if parsed.netloc or ref.startswith("//"):
+            raise ValueError("Protocol-relative README reference")
+        if not parsed.path:
             continue
         path = unquote(parsed.path)
+        if "\\" in path or any(ord(ch) < 32 or ord(ch) == 127 for ch in path):
+            raise ValueError("Ambiguous decoded README local path")
         if path.startswith("/") or ".." in Path(path).parts:
             raise ValueError("README local link escapes repository")
         target = (root / path).resolve()
@@ -149,6 +158,14 @@ def self_test() -> None:
             "duplicate-image-alt": '<img src="assets/header.webp" alt="Descriptive image text" alt="Other image description">',
             "unquoted-missing-link": '<a href=missing.md>Missing</a>',
             "encoded-unsupported-scheme": '<a href="java&#115;cript:alert">Unsafe</a>',
+            "protocol-relative": '<a href="//example.invalid/path">Unsafe</a>',
+            "missing-http-host": '<a href="https:example.invalid">Unsafe</a>',
+            "empty-http-host": '<a href="https:///example.invalid">Unsafe</a>',
+            "control-prefix": '<a href="&#9;https://example.invalid">Unsafe</a>',
+            "control-in-url": '<a href="https://example.invalid/&#10;path">Unsafe</a>',
+            "encoded-backslash": '[Unsafe](assets%5cheader.webp)',
+            "encoded-control": '[Unsafe](guide.md%00)',
+            "hostless-authority": '<a href="https://:443/path">Unsafe</a>',
         }
         for name, text in cases.items():
             try:
@@ -183,7 +200,7 @@ def self_test() -> None:
         else:
             raise AssertionError("Expected empty policy rejection")
     print("PROFILE_SECURITY_NAVIGATION_SELFTEST_PASS cases=9")
-    print("PROFILE_REF_SELFTEST_PASS cases=18")
+    print("PROFILE_REF_SELFTEST_PASS cases=26")
 
 
 def verify(image_path: str, expected_sha: str, retired_path: str) -> None:
