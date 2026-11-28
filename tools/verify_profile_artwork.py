@@ -70,8 +70,16 @@ def verify_readme_references(source: str, root: Path | None = None) -> None:
             scheme = parsed.scheme.lower()
             if scheme not in ("http", "https", "mailto", "tel"):
                 raise ValueError("Unsupported README link scheme")
-            if scheme in ("http", "https") and (not parsed.netloc or not parsed.hostname):
-                raise ValueError("HTTP(S) README reference requires a host")
+            if scheme in ("http", "https"):
+                if not parsed.netloc or not parsed.hostname:
+                    raise ValueError("HTTP(S) README reference requires a host")
+                if any(ch.isspace() for ch in parsed.hostname):
+                    raise ValueError("Whitespace in HTTP(S) README host")
+                # urllib validates numeric syntax and range only when .port is read.
+                try:
+                    _ = parsed.port
+                except ValueError as exc:
+                    raise ValueError("Invalid HTTP(S) README port") from exc
             continue
         if parsed.netloc or ref.startswith("//"):
             raise ValueError("Protocol-relative README reference")
@@ -136,7 +144,7 @@ def self_test() -> None:
         (root / "assets" / "header.webp").write_bytes(b"fixture only")
         (root / "guide.md").write_text("ok", encoding="utf-8")
         valid = ('<img src="assets/header.webp" alt="Verified engineering artwork"> '
-                 '[Guide](guide.md) [GitHub](https://github.com) '
+                 '[Guide](guide.md) [GitHub](https://github.com) [Explicit port](https://example.invalid:443) '
                  '![Engineering artwork](assets/header.webp) '
                  '<a href=guide.md>Guide</a>')
         verify_readme_references(valid, root=root)
@@ -166,6 +174,9 @@ def self_test() -> None:
             "encoded-backslash": '[Unsafe](assets%5cheader.webp)',
             "encoded-control": '[Unsafe](guide.md%00)',
             "hostless-authority": '<a href="https://:443/path">Unsafe</a>',
+            "non-numeric-port": '<a href="https://example.invalid:bad/path">Unsafe</a>',
+            "out-of-range-port": '<a href="https://example.invalid:65536/path">Unsafe</a>',
+            "space-in-host": '<a href="https://exa mple.invalid/path">Unsafe</a>',
         }
         for name, text in cases.items():
             try:
@@ -200,7 +211,7 @@ def self_test() -> None:
         else:
             raise AssertionError("Expected empty policy rejection")
     print("PROFILE_SECURITY_NAVIGATION_SELFTEST_PASS cases=9")
-    print("PROFILE_REF_SELFTEST_PASS cases=26")
+    print("PROFILE_REF_SELFTEST_PASS cases=29")
 
 
 def verify(image_path: str, expected_sha: str, retired_path: str) -> None:
